@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_TAG="bdaasjava:0_0_1"
+DOCKER_TAG="runtimes/bdaasjava:0_0_1"
 PACKAGE_REPO="../packages"
 
 # In the version file are saved all the references to the

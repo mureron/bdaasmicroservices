@@ -13,3 +13,4 @@ RUN mkdir -p shellinaboxBin && autoreconf -i && ./configure --prefix=/home/legac
 ENV PATH="$PATH:/home/legacy/jre/bin"
 
 WORKDIR /home/legacy
+

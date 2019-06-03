@@ -1,0 +1,18 @@
+version: '2'
+services:
+  jupyterlab:
+    image: components/bdaasjupyter:0_0_1
+    container_name: jupyterlab
+    environment:
+      - TF=NO
+      - STANDALONE=YES
+      - CASSANDRA=NO
+      - HDFS=NO
+      - JUPYTERPORT=8900
+      - JUPYTER_NOTEBOOKS_DIR=/volumen/data/     
+    ports:
+      - "8900:8900"
+    volumes: 
+      - jupyter-vol:/volumen/data/
+volumes:
+  jupyter-vol:

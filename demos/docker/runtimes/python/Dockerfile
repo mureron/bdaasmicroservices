@@ -1,4 +1,4 @@
-FROM bdaasjava:0_0_1
+FROM runtimes/bdaasjava:0_0_1
 WORKDIR /home/legacy
 COPY packages/ ./
 
