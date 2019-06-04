@@ -10,7 +10,7 @@ MINICONDA_PACKAGE="Miniconda3-latest-Linux-x86_64.sh"
 MINICONDA_URL_DOWNLOAD="https://repo.continuum.io/miniconda/$MINICONDA_PACKAGE"
 
 # SPARK PACKAGE
-SPARK_VERSION="2.4.3"
+SPARK_VERSION="2.3.3"
 SPARK_PACKAGE="spark-$SPARK_VERSION-bin-without-hadoop.tgz"
 SPARK_URL_DOWNLOAD="https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-without-hadoop.tgz"
 

@@ -12,7 +12,7 @@ export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 
 
 echo "c = get_config()
-c.NotebookApp.notebook_dir = '$JUPYTER_NOTEBOOKS_DIR'
+c.NotebookApp.notebook_dir = '/data/jupyter/'
 c.NotebookApp.password_required = False
 c.NotebookApp.token = ''
 c.NotebookApp.allow_origin = '*'
@@ -20,26 +20,18 @@ c.NotebookApp.tornado_settings = {'headers': { 'Content-Security-Policy': \"fram
 
 echo "Jupyter Mode $STANDALONE & HDFS $HDFS & CASSANDRA $CASSANDRA"
 
-cp -R /home/legacy/examples $JUPYTER_NOTEBOOKS_DIR
-
-if  [[ $HDFS == "YES" ]]; 
+if  [[ $HDFS == "YES" ]];
 then
        # Set up the core-site Xml
     echo "Set Up HDFS"
     echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
     <?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>
     <configuration>
-        <property><name>fs.defaultFS</name><value>hdfs://$NAMENODE_HOSTNAME:$NAMENODE_METADATA_PORT</value></property>
+        <property><name>fs.defaultFS</name><value>hdfs://$HDFS_NAMENODE_HOSTNAME:$HDFS_NAMENODE_METADATA_PORT</value></property>
         <property><name>hadoop.http.staticuser.user</name><value>root</value></property>
     </configuration>" > $HADOOP_HOME/etc/hadoop/core-site.xml
 
 fi
-
-if [[ $TF == "YES" ]]
-#then pip install $RUNTIME_DIR/tensorflow/tensorflow*.whl
-then conda install -C  -y tensorflow keras
-fi
-
 
 if [[ $STANDALONE == "YES" ]];
 then
@@ -51,12 +43,14 @@ then
     jupyter-lab --allow-root --ip=$(hostname) --port=$JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py
 else
     echo "Jupyter SPARK Mode DISTRIBUTED"
+    #Adding the information for the Spark Application WebUI
+
     export PYSPARK_DRIVER_PYTHON=$JUPYTERPATH/jupyter
 	export PYSPARK_DRIVER_PYTHON_OPTS="lab --allow-root --ip $HOSTNAME --port $JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py"
-    
+
     echo "Launching jupyter"
-	echo " spark --master spark://$MASTER_HOSTNAME:$MASTER_PORT >> /tmp/jupyter.log 2>&1 "
-    pyspark --master spark://$MASTER_HOSTNAME:$MASTER_PORT  
+	echo " spark --master spark://$SPARK_MASTER_HOSTNAME:$SPARK_MASTER_PORT >> /tmp/jupyter.log 2>&1 "
+    pyspark --master spark://$SPARK_MASTER_HOSTNAME:$SPARK_MASTER_PORT
 fi
 
 echo "Jupyter Lab Ready To use"
