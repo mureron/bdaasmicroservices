@@ -23,3 +23,9 @@ SHELLINABOX_URL_DOWNLOAD="https://github.com/shellinabox/shellinabox/archive/v$S
 HADOOP_VERSION="2.7.7"
 HADOOP_PACKAGE="hadoop-$HADOOP_VERSION.tar.gz"
 HADOOP_URL_DOWNLOAD="http://apache.rediris.es/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
+
+# CASSANDRA
+
+CASSANDRA_VERSION="3.11.4"
+CASSANDRA_PACKAGE="apache-cassandra-3.11.4-bin.tar.gz"
+CASSANDRA_URL_DOWNLOAD="http://apache.uvigo.es/cassandra/$CASSANDRA_VERSION/$CASSANDRA_PACKAGE"
