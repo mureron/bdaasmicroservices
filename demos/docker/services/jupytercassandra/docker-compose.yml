@@ -3,22 +3,22 @@ version: '3'
 services:
   cassandra-seed:
     image: components/bdaascassandra:0_0_1
-    hostname: cassandra-seed
-    container_name: cassandra-seed-node
     environment:
       - CLUSTER_NAME=seminario
       - STORAGE_PORT=7000
       - START_NATIVE_TRANSPORT=TRUE
       - NATIVE_TRANSPORT_PORT=9042
       - RPC_PORT=9160
+    volumes:
+      - cassandra-volume-seed:/data/cassandra
     networks:
       cassandra:
         ipv4_address: 172.28.1.2
 
-  cassandra-node:
+  cassandra-node1:
     image: components/bdaascassandra:0_0_1
     environment:
-      - CASSANDRA_SEEDS=cassandra-seed-node
+      - CASSANDRA_SEEDS=cassandra-seed
       - CLUSTER_NAME=seminario
       - STORAGE_PORT=7000
       - START_NATIVE_TRANSPORT=TRUE
@@ -26,9 +26,28 @@ services:
       - RPC_PORT=9160
     depends_on:
       - cassandra-seed
+    volumes:
+      - cassandra-volume-node1:/data/cassandra
     networks:
       cassandra:
         ipv4_address: 172.28.1.3
+
+  cassandra-node2:
+    image: components/bdaascassandra:0_0_1
+    environment:
+      - CASSANDRA_SEEDS=cassandra-seed
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - START_NATIVE_TRANSPORT=TRUE
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+    depends_on:
+      - cassandra-seed
+    volumes:
+      - cassandra-volume-node2:/data/cassandra
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.4
   jupyter:
     image: components/bdaasjupyter:0_0_1
     container_name: jupytercassandra
@@ -39,11 +58,10 @@ services:
       - JUPYTERPORT=8900
       - CASSANDRA_HOSTNAME=cassandra-seed
       - REPLICATION_FACTOR=1
-      - CASSANDRA_SEEDS=172.28.1.2
+      - CASSANDRA_SEEDS=cassandra-seed
     networks:
       cassandra:
         ipv4_address: 172.28.1.1
-
     ports:
       - "8900:8900"
     depends_on:
@@ -53,7 +71,10 @@ services:
 
 volumes:
   jupyter-vol:
-    
+  cassandra-volume-seed:
+  cassandra-volume-node1:
+  cassandra-volume-node2:
+
 networks:
   cassandra:
     driver: bridge

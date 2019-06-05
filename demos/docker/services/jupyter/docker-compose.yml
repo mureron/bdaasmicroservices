@@ -8,10 +8,10 @@ services:
       - CASSANDRA=NO
       - HDFS=NO
       - JUPYTERPORT=8900
-      - JUPYTER_NOTEBOOKS_DIR=/volumen/data/
+      - JUPYTER_NOTEBOOKS_DIR=/data/juptyer
     ports:
       - "8900:8900"
     volumes:
-      - jupyter-vol:/volumen/data/
+      - jupyter-vol:/data/juptyer
 volumes:
   jupyter-vol:
