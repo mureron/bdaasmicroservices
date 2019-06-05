@@ -2,8 +2,6 @@
 DOCKER_TAG="components/bdaassparkmaster:0_0_1"
 PACKAGE_REPO="../runtimes/packages"
 
-
-
 if [ -d packages ]; then
     rm -rf packages
 fi

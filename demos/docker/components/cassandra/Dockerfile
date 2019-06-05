@@ -1,4 +1,4 @@
-FROM  runtimes/bdaasjava:0_0_1
+FROM  rmuresano/bdaasjava:0_0_1
 LABEL maintainer="Radiatus team"
 
 WORKDIR /home/legacy

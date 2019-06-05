@@ -1,5 +1,5 @@
 # Parto de la imagen principal
-FROM  runtimes/bdaasjupyter:0_0_1
+FROM  rmuresano/bdaasjupyter:0_0_1
 LABEL maintainer="Ronal Muresano"
 
 WORKDIR /home/legacy
