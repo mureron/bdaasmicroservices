@@ -10,6 +10,7 @@ export CASSANDRA_DRIVER_HOME="$RUNTIME_DIR/CassandraDriver"
 export PATH="$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$CASSANDRA_HOME/bin:$CASSANDRA_DRIVER_HOME/bin:$SPARK_HOME/bin:$PATH"
 export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 
+cp -r $RUNTIME_DIR/examples/ /data/jupyter/
 
 echo "c = get_config()
 c.NotebookApp.notebook_dir = '/data/jupyter/'
@@ -31,6 +32,12 @@ then
         <property><name>hadoop.http.staticuser.user</name><value>root</value></property>
     </configuration>" > $HADOOP_HOME/etc/hadoop/core-site.xml
 
+fi
+
+if [[ $CASSANDRA == "YES" ]];
+then
+    # Including Cassandra Seeds
+    echo "$CASSANDRA_SEEDS" > /data/jupyter/cassandraseeds
 fi
 
 if [[ $STANDALONE == "YES" ]];

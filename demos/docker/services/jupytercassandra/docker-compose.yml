@@ -11,6 +11,10 @@ services:
       - START_NATIVE_TRANSPORT=TRUE
       - NATIVE_TRANSPORT_PORT=9042
       - RPC_PORT=9160
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.2
+
   cassandra-node:
     image: components/bdaascassandra:0_0_1
     environment:
@@ -22,6 +26,9 @@ services:
       - RPC_PORT=9160
     depends_on:
       - cassandra-seed
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.3
   jupyter:
     image: components/bdaasjupyter:0_0_1
     container_name: jupytercassandra
@@ -32,6 +39,11 @@ services:
       - JUPYTERPORT=8900
       - CASSANDRA_HOSTNAME=cassandra-seed
       - REPLICATION_FACTOR=1
+      - CASSANDRA_SEEDS=172.28.1.2
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.1
+
     ports:
       - "8900:8900"
     depends_on:
@@ -41,3 +53,11 @@ services:
 
 volumes:
   jupyter-vol:
+    
+networks:
+  cassandra:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

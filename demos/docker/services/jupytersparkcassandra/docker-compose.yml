@@ -1,5 +1,34 @@
 version: '3'
 services:
+  cassandra-seed:
+    image: components/bdaascassandra:0_0_1
+    hostname: cassandra-seed
+    container_name: cassandra-seed-node
+    environment:
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - START_NATIVE_TRANSPORT=TRUE
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+    networks:
+      cassandraspark:
+        ipv4_address: 172.28.1.1
+  
+  cassandra-node:
+    image: components/bdaascassandra:0_0_1
+    environment:
+      - CASSANDRA_SEEDS=cassandra-seed-node
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - START_NATIVE_TRANSPORT=TRUE
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+    depends_on:
+      - cassandra-seed
+    networks:
+      cassandraspark:
+        ipv4_address: 172.28.1.2
+  
 # Set up NameNode and Spark Master
   sparkmaster:
     image: components/bdaassparkmaster:0_0_1
@@ -20,6 +49,10 @@ services:
       - "50070:50070" # WEB NameNode Int
     volumes:
       - hdfs-name-node:/hdfsdata/nameNode/
+    networks:
+      cassandraspark:
+        ipv4_address: 172.28.1.3
+
 # Setup the Worker Node 1.
   sparkworker:
     image: components/bdaassparkworker:0_0_1
@@ -29,19 +62,19 @@ services:
     links:
       - sparkmaster
     environment:
-      - SPARK_MASTER_HOSTNAME=sparkmaster
+      - SPARK_MASTER_HOSTNAME=172.28.1.3
       - SPARK_MASTER_PORT=7077
-      - HDFS_NAMENODE_HOSTNAME=sparkmaster
+      - HDFS_NAMENODE_HOSTNAME=172.28.1.3
       - HDFS_NAMENODE_METADATA_PORT=9000
       - HDFS_REPLICATION_FACTOR=1
       - HDFS=YES
       - SPARK_WORKER_WEBUI_PORT=8081
     ports:
       - "8081-8090:8081"
-  cassandra-seed:
-
-  cassandra-node:
-
+    networks:  
+      cassandraspark:
+        ipv4_address: 172.28.1.4
+  
   jupyter:
     image: components/bdaasjupyter:0_0_1
     hostname: jupyter
@@ -54,18 +87,29 @@ services:
       - STANDALONE=NO
       - JUPYTERPORT=8900
       - HDFS=YES
-      - HDFS_NAMENODE_HOSTNAME=sparkmaster
+      - HDFS_NAMENODE_HOSTNAME=172.28.1.3
       - HDFS_DATANODE_WEBUI_PORT=50075
       - HDFS_NAMENODE_METADATA_PORT=9000
       - HDFS_REPLICATION_FACTOR=1
-      - SPARK_MASTER_HOSTNAME=sparkmaster
+      - SPARK_MASTER_HOSTNAME=172.28.1.3
       - SPARK_MASTER_PORT=7077
+      - CASSANDRA_SEEDS=172.28.1.1
     ports:
       - "8900:8900" # WEB interface JupyterLab
     volumes:
       - jupyter-vol:/data/jupyter/
-
+    networks:  
+      cassandraspark:
+        ipv4_address: 172.28.1.5
 volumes:
   jupyter-vol:
   hdfs-name-node:
 #  hdfs-data-node:
+
+networks:
+  cassandraspark:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

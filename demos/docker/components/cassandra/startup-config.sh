@@ -5,7 +5,6 @@ export CASSANDRA_HOME="$RUNTIME_DIR/cassandra"
 export PATH="$PATH:$JAVA_HOME/bin:$CASSANDRA_HOME/bin"
 export LISTEN_ADDRESS=$(hostname -i)
 
-
 if [[ -z "$CASSANDRA_SEEDS" ]];
 then
     export CASSANDRA_SEEDS=$LISTEN_ADDRESS

@@ -3,3 +3,4 @@ demos/docker/runtimes/packages/hadoop-2.7.7.tar.gz
 demos/docker/runtimes/packages/shellinabox-2.20.zip
 demos/docker/runtimes/packages/spark-2.3.3-bin-without-hadoop.tgz
 demos/docker/runtimes/packages/apache-cassandra-3.11.4-bin.tar.gz
+demos/docker/runtimes/packages/spark-cassandra-connector_2.11-2.0.9.jar

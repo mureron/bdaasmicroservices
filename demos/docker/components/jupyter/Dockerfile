@@ -6,4 +6,6 @@ WORKDIR /home/legacy
 
 COPY startup-config.sh ./
 
+COPY packages/ ./
+
 ENTRYPOINT ./startup-config.sh

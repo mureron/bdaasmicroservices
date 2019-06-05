@@ -29,3 +29,9 @@ HADOOP_URL_DOWNLOAD="http://apache.rediris.es/hadoop/common/hadoop-$HADOOP_VERSI
 CASSANDRA_VERSION="3.11.4"
 CASSANDRA_PACKAGE="apache-cassandra-3.11.4-bin.tar.gz"
 CASSANDRA_URL_DOWNLOAD="http://apache.uvigo.es/cassandra/$CASSANDRA_VERSION/$CASSANDRA_PACKAGE"
+
+# Spark Cassandra CONNECTOR
+SPARK_CASSANDRA_VERSION="2.11-2.0.9"
+SPARK_CASSANDRA_CONNECTOR_PACKAGE="spark-cassandra-connector_$SPARK_CASSANDRA_VERSION.jar"
+SPARK_CASSANDRA_CONNECTOR_URL_DOWNLOAD="http://central.maven.org/maven2/com/datastax/spark/spark-cassandra-connector_2.11/2.0.9/spark-cassandra-connector_2.11-2.0.9.jar"
+

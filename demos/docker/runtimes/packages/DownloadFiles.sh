@@ -54,6 +54,13 @@ else
     echo "[INFO] SHELLINABOX OK"
 fi
 
+if [  ! -f "$SPARK_CASSANDRA_CONNECTOR_PACKAGE" ]; then
+    echo "[INFO] $SPARK_CASSANDRA_CONNECTOR_PACKAGE does not exist"
+    echo "[INFO] Prepare to download it"
+    wget -O $SPARK_CASSANDRA_CONNECTOR_PACKAGE $SPARK_CASSANDRA_CONNECTOR_URL_DOWNLOAD 
+else
+    echo "[INFO] SHELLINABOX OK"
+fi
 
 # Verify if the image exist
 DOCKER_BASE=$(docker images --format "{{.Repository}}:{{.Tag}}" ubuntu:latest)
