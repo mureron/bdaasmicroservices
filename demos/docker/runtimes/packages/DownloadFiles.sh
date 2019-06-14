@@ -43,7 +43,7 @@ if [  ! -f "$HADOOP_PACKAGE" ]; then
     echo "[INFO] Prepare to download it"
     wget -O $HADOOP_PACKAGE $HADOOP_URL_DOWNLOAD
 else
-    echo "[INFO] SHELLINABOX OK"
+    echo "[INFO] HADOOP OK"
 fi
 
 if [  ! -f "$CASSANDRA_PACKAGE" ]; then
@@ -51,7 +51,7 @@ if [  ! -f "$CASSANDRA_PACKAGE" ]; then
     echo "[INFO] Prepare to download it"
     wget -O $CASSANDRA_PACKAGE $CASSANDRA_URL_DOWNLOAD
 else
-    echo "[INFO] SHELLINABOX OK"
+    echo "[INFO] CASSANDRA OK"
 fi
 
 if [  ! -f "$SPARK_CASSANDRA_CONNECTOR_PACKAGE" ]; then
@@ -59,7 +59,7 @@ if [  ! -f "$SPARK_CASSANDRA_CONNECTOR_PACKAGE" ]; then
     echo "[INFO] Prepare to download it"
     wget -O $SPARK_CASSANDRA_CONNECTOR_PACKAGE $SPARK_CASSANDRA_CONNECTOR_URL_DOWNLOAD 
 else
-    echo "[INFO] SHELLINABOX OK"
+    echo "[INFO] SPARK CASSANDRA CONNECTOR OK"
 fi
 
 # Verify if the image exist

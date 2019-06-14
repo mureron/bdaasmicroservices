@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_TAG="components/bdaascassandra:0_0_1"
+DOCKER_TAG="rmuresano/bdaascassandra:0_0_1"
 PACKAGE_REPO="../../runtimes/packages"
 
 

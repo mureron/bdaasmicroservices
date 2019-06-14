@@ -2,7 +2,7 @@ version: '3'
 services:
 # Set up NameNode and Spark Master
   sparkmaster:
-    image: components/bdaassparkmaster:0_0_1
+    image: rmuresano/bdaassparkmaster:0_0_1
     hostname: sparkmaster
     container_name: sparkmaster
     environment:
@@ -22,7 +22,7 @@ services:
       - hdfs-name-node:/hdfsdata/nameNode/
 # Setup the Worker Node 1.
   sparkworker:
-    image: components/bdaassparkworker:0_0_1
+    image: rmuresano/bdaassparkworker:0_0_1
     hostname: sparkworker
     depends_on:
       - sparkmaster
@@ -42,7 +42,7 @@ services:
     ports:
       - "8081-8090:8081"
   jupyter:
-    image: components/bdaasjupyter:0_0_1
+    image: rmuresano/bdaasjupyter:0_0_1
     hostname: jupyter
     container_name: jupyter
     depends_on:

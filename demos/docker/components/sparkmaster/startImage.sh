@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_TAG="components/bdaassparkmaster:0_0_1"
+DOCKER_TAG="rmuresano/bdaassparkmaster:0_0_1"
 PACKAGE_REPO="../runtimes/packages"
 
 if [ -d packages ]; then
