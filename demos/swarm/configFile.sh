@@ -1,0 +1,6 @@
+#!/bin/bash
+WORKER_NAME="worker-bdaas"
+MANAGER_NAME="manager-bdaas"
+NUM_WORKERS=3
+WORKER_MEMORY=2048
+MANAGER_MEMORY=4096
