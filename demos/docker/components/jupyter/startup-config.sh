@@ -47,13 +47,13 @@ then
     echo "Jupyter Port  = $JUPYTERPORT"
     echo "Jupyter Path  = $JUPYTERPATH"
     echo "$JUPYTERPATH/jupyter-lab --allow-root --ip $(hostname) --port $JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py"
-    jupyter-lab --allow-root --ip=$(hostname) --port=$JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py
+    jupyter-lab --allow-root --ip=0.0.0.0 --port=$JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py
 else
     echo "Jupyter SPARK Mode DISTRIBUTED"
     #Adding the information for the Spark Application WebUI
 
     export PYSPARK_DRIVER_PYTHON=$JUPYTERPATH/jupyter
-	export PYSPARK_DRIVER_PYTHON_OPTS="lab --allow-root --ip $HOSTNAME --port $JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py"
+	export PYSPARK_DRIVER_PYTHON_OPTS="lab --allow-root --ip 0.0.0.0 --port $JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py"
 
     echo "Launching jupyter"
 	echo " spark --master spark://$SPARK_MASTER_HOSTNAME:$SPARK_MASTER_PORT >> /tmp/jupyter.log 2>&1 "
