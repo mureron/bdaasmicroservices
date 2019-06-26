@@ -1,0 +1,37 @@
+version: '3.4'
+services:
+  elastic-1:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.2
+    hostname: elastic-1
+    environment:
+      - cluster.name=Elastic_cluster
+      - discovery.zen.ping.unicast.hosts=elastic-1,elastic-2
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    volumes:
+      - elastic-volume-1:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+  elastic-2:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.2
+    hostname: elastic-2
+    environment:
+      - cluster.name=Elastic_cluster
+      - discovery.zen.ping.unicast.hosts=elastic-1,elastic-2
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    volumes:
+      - elastic-volume-2:/usr/share/elasticsearch/data
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:6.6.2
+    hostname: kibana
+    environment:
+      - SERVER_NAME="kibana"
+      - ELASTICSEARCH_URL="http://elastic-1:9200"
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elastic-1
+
+volumes:
+  elastic-volume-1:
+  elastic-volume-2:
+
