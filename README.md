@@ -22,6 +22,46 @@ Las imágenes parte de una imagen base [Ubuntu:latest](https://hub.docker.com/_/
 
 Java -> Python -> Spark -> Jupyter.
 
+Si se desea crear una imagen en concreto, se debe entrar en el directorio correspondiente y usar el fichero [compileImage.sh].
+
+## Docker Compose
+
+Para hacer pruebas de desarrollo se ha seleccionado el docker compose, para ejecutar este servicio se deben hacer las diferentes imágenes que usaran los componentes. Los servicios están compuestos por componentes y estos se deben compilar para poder ejecutar. Al compilarlos se crea una imagen docker que será la que se utilizará por el docker-compose. 
+
+En el directorio components hay un fichero [compileComponents.sh](https://github.com/mureron/bdaasmicroservices/blob/master/docker/components/compileComponents.sh). Esto crea la imagen de todos los componentes que se tienen en el repo. En caso de querer añadir alguno y subir el commit por favor mantener el mismo esquema (ayuda al aprendizaje).
+
+
+### Desplegar Servicios en Docker compose. 
+
+Cada servicio esta compuesto por un fichero yaml, este fichero contiene la información del despliegue (dependencias, puertos, variables de entornos, imagen, etc). Selecciones cualquier servicio entrando en el directorio "services" y dentro puede seleccionar cualquiera de los servicios de ejemplo que se han diseñado para este seminario. Un ejemplo [JupyterSpark](https://github.com/mureron/bdaasmicroservices/blob/master/docker/services/jupyterspark/docker-compose.yml). 
+
+Para ejecutar este servicio, entre en el directorio y use la instrucción
+```
+    docker-compose up 
+```
+
+Para replegar el servicio utilice
+
+```
+    docker-compose down
+```
+
+Al hacer un docker-compose up, esto levanta el servicio y para acceder se debe usar la IP del contenedor que se asigna y los puertos de las interfaces WebUI. en caso de Spark se ha configurado la 8080 y para el Jupyter la 8900. Es decir se entraría http://IP:8900
+
+Con esto se pueden hacer varias pruebas, instalar librerías, ejecutar algorítmos, etc. 
+
+
+
+### Docker Swarm. 
+
+
+
+
+
+
+
+
+
 
 ## Eliminar node de ssh-host
 
