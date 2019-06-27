@@ -51,8 +51,70 @@ Al hacer un docker-compose up, esto levanta el servicio y para acceder se debe u
 Con esto se pueden hacer varias pruebas, instalar librerías, ejecutar algorítmos, etc. 
 
 
-
 ### Docker Swarm. 
+
+Para el uso del docker swarm se ha creado un fichero de configuración que permite levantar un pequeño cluster en local utilizando Virtual Box. Este fichero está dentro del directorio Swarm y se llama [ConfigFile.sh](https://github.com/mureron/bdaasmicroservices/blob/master/swarm/configFile.sh)
+
+En este fichero puede cambiar el número de workers, así como el nombre y la cantidad de recursos. 
+
+```
+    WORKER_NAME="worker-bdaas"
+    MANAGER_NAME="manager-bdaas"
+    NUM_WORKERS=3
+    WORKER_MEMORY=2048
+    MANAGER_MEMORY=4096
+```
+
+Finalmente para crear el cluster, se debe llamar el fichero [create-VMCluster.sh](https://github.com/mureron/bdaasmicroservices/blob/master/swarm/create_VMcluster.sh). Con esto se debe crear un cluster de 3 nodos y un master. 
+
+El siguiente paso es crear el entorno de Docker Swarm. Para esto use el fichero [create-swarmEnv.sh](https://github.com/mureron/bdaasmicroservices/blob/master/swarm/create_swarmEnv.sh). Con esto se inicializa el master y se asocian los worker con el token que da el master.
+
+Finalmente, se puede iniciar el cluster haciendo [DeploySwarm.sh](https://github.com/mureron/bdaasmicroservices/blob/master/swarm/deploySwarm.sh)
+
+
+#### Algunos comandos de Docker Swarm
+
+Entrar en el nodo Master
+
+```
+    docker-machine ssh manager-bdaas
+```
+
+Obtener la información del cluster. Dentro del nodo máster se puede hacer el siguiente comando y se puede visualizar el leader y los workers
+
+```
+    docker node ls
+```
+
+Para desplegar un servicio, 
+
+```
+    docker stack deploy -c compose-file.yaml
+
+```
+Algunos ejemplo se encuentran en el directorio services.
+
+Para activar la interfaz gráfica (SwarmPit), se debe en el nodo máster hacer los siguientes pasos:
+
+```
+    git clone https://github.com/swarmpit/swarmpit
+    docker stack deploy -c swarmpit/docker-compose.yml swarmpit
+```
+
+Esto levanta la interfaz gráfica en el puerto 888, si se desea modificar, hay que modificarlo en el yaml descargado que está en el directorio swarmpit dentro del manager. 
+
+
+### Kubernetes
+
+
+
+
+
+
+
+
+
+
 
 
 
