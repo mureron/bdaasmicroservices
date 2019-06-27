@@ -224,7 +224,26 @@ Finalmente ya tenemos un jupyter ejecutando, en localhost:8002
 
 ### Desplegar un servicio de kubernetes con helm. 
 
-Helm es un administador de aplicaciones de Kubernetes. 
+Helm es un administador de aplicaciones de Kubernetes. Este trabaja con recetas que son complejas de hacer pero una vez hechas muy fácil de desplegar. 
+
+Para esto se debe instalar helm. Siga las siguientes instrucciones [Helm Instalation](https://helm.sh/docs/using_helm/#installing-helm)
+
+Para desplegar es muy sencillo, se debe buscar el chart que se quiere desplegar y luego se hace 
+
+```
+    helm install --name my-release stable/spark
+```
+Este despliegue levantará un Zeppelin, más un máster y 3 workers. En el directorio de services tengo dos ejemplos con un fichero [values](https://github.com/mureron/bdaasmicroservices/blob/master/kubernetes/Configuration/services/zeppelinspark/values.yaml)
+
+En este fichero se puede modificar el número de worker para ejecutar en local, en mi caso lo he dejado en un worker. Para desplegar con un fichero value propio se debe ejecutar.
+
+```
+    helm install --name spark –f values.yaml stable/spark
+```
+
+Luego para ver las interfaces se debe hacer el mismo proceso del tunel ssh.
+
+Para cualquier dudad o información, escribir a rmuresano@gmail.com
 
 
 
@@ -233,9 +252,7 @@ Helm es un administador de aplicaciones de Kubernetes.
 
 
 
-
-
-
+Algunos puntos técnicos:
 
 
 
@@ -287,10 +304,7 @@ echo "KUBELET_EXTRA_ARGS=--node-ip=$IP_ADDR" > /etc/default/kubelet
 
 Doc: https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/
 
-
-
 Se debe colocar un port-foward desde el master al puerto donde está levantado el pod
-
 
 **kubectl port-forward service <servicio> <puertolocal>:<puertoremoto>
 
