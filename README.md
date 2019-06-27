@@ -1,3 +1,28 @@
+## Orquestación de Servicios
+
+Este repositorio busca agrupar un conjunto de tecnologías para desplegar diferentes orquestadores de servicios con el objetivo de obtener una visión general desde el punto de vista de desarrollo hasta producción.
+
+## ¿Cómo usar este repositorio?
+
+Lo primero que tenemos que crear son las imágenes docker en local, no es un punto necesario porque las mismas están registradas en mi dockerhub personal. Las imagenes se pueden ver aquí [Working Images] (https://cloud.docker.com/u/rmuresano/repository/list).
+
+En caso de querer crear las imágenes en local, se puede hacer aplicando los siguientes pasos:
+
+1) Entrar en el directorio Docker. 
+2) Dentro del directorio Docker hay tres directorios "Components, Services, Runtimes". En nuestro caso entraremos en runtime para comenzar el proceso de creación de las imágenes. 
+3) Para iniciar el proceso se deben descargar los paquetes. Esto se puede hacer desde el directorio packages y se inicia el proceso [DownloadFiles.sh](https://github.com/mureron/bdaasmicroservices/blob/master/docker/runtimes/packages/DownloadFiles.sh).
+
+En este punto se deben haber descargado todos los ficheros necesarios para hacer las imágenes docker (runtimes) necesarios para la ejecución de los ejemplos. 
+
+4) Luego salimos del directorio packages y desde el directorio de Runtime, podemos ejecutar el fichero [running.sh](https://github.com/mureron/bdaasmicroservices/blob/master/docker/runtimes/running.sh). Este proceso crea las imágenes necesarias para la ejecución de los dockers. 
+
+Nota: En caso de modificar una imagen en concreto, se debe considerar que las mismas tienen una herencia.
+
+Las imágenes parte de una imagen base [Ubuntu:latest](https://hub.docker.com/_/ubuntu) y luego tienen una secuencia de creación. En caso de hacer una imagen en concreto para añadir un paquete, las mismas se deben hacer en este orden. 
+
+Java -> Python -> Spark -> Jupyter.
+
+
 ## Eliminar node de ssh-host
 
 ssh-keygen -R <host>
@@ -45,6 +70,7 @@ echo "KUBELET_EXTRA_ARGS=--node-ip=$IP_ADDR" > /etc/default/kubelet
 ## PORT FORWARD
 
 Doc: https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/
+
 
 
 Se debe colocar un port-foward desde el master al puerto donde está levantado el pod
