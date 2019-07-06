@@ -1,3 +1,6 @@
+Tutorial: https://www.youtube.com/watch?v=fpxDGU2KdkA&list=PLEiEAq2VkUULlNtIFhEQHo8gacvme35rz&index=11&t=172s
+
+
 ## Create a VPC: Virtual Private Cloud
 
 VPC: It allows to enable AWS resources into a virtual private network  that you define
@@ -9,6 +12,11 @@ VPC: It allows to enable AWS resources into a virtual private network  that you 
 ```
 Note: Tenancy -> Dedicate is better in case of performance but some charge might be applied.
     Subnets must be associated to a VPC.
+
+
+![VPC](images/VPCconcept.png)
+
+![VPC](images/VPCPrivatePublic.png)
 
 ### Create Subnets
 
@@ -34,6 +42,9 @@ Then the Private subnet, in this case I changed the Availability Zone and the CI
    IPv4 CIDR: 10.0.2.0/24  -> 256 IP available
 ```
 
+![Subnet](images/subnet.png)
+
+
 ### Internet Gateway
 
 It is a horizontally scaled, redundant, and high available VPC component that allows communication between instances in your VPC and the internet. It can be attached one internet gateway by VPC.
@@ -56,11 +67,22 @@ Then, it must be included the route. It is done in the Route Panel and then it m
 ```
 Destination      Target
 0.0.0.0/0      RonalTestinIGW
+````
 
 Then, the public subnet has to be asssociated with the IGW in order to have internet access. To perform this, we have to click on subnet association and select the subnet which will have internet access. In our example the Public Subnet.
 
+![RouteTable](images/routeTable.png)
 
 ### NAT Gateway
+
+To set up the Nat Ga
+
+
+
+
+![NatDevice](images/natdevice.png)
+
+
 
 
 
