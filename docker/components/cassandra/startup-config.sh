@@ -5,11 +5,18 @@ export CASSANDRA_HOME="$RUNTIME_DIR/cassandra"
 export PATH="$PATH:$JAVA_HOME/bin:$CASSANDRA_HOME/bin"
 export LISTEN_ADDRESS=$(hostname -i)
 
-if [[ -z "$CASSANDRA_SEEDS" ]];
-then
-    export CASSANDRA_SEEDS=$LISTEN_ADDRESS
-fi
+echo "IP ADDRESS: $LISTEN_ADDRESS" 
 
+#if [[ -z "$CASSANDRA_SEEDS" ]];
+#then
+#    export CASSANDRA_SEEDS=$LISTEN_ADDRESS
+#    echo "SEEDNODE"
+#else
+#    echo "CASSANDRA NODE"
+#    sleep 5
+#fi
+
+echo "Seed: $CASSANDRA_SEEDS   -> $LISTEN_ADDRESS " 
 # Yaml
 echo "cluster_name: $CLUSTER_NAME" >> $CASSANDRA_HOME/conf/cassandra.yaml
 echo "listen_address: $LISTEN_ADDRESS" >> $CASSANDRA_HOME/conf/cassandra.yaml
@@ -37,6 +44,13 @@ echo "hostname = $LISTEN_ADDRESS" >> $CASSANDRA_HOME/conf/.cqlshrc
 # The port to connect to (9042 is the native protocol default)
 echo "port = $NATIVE_TRANSPORT_PORT" >> $CASSANDRA_HOME/conf/.cqlshrc
 
-echo "Cassandra finished setup."
+
 
 $CASSANDRA_HOME/bin/cassandra -f -R
+
+echo "Cassandra finished setup."
+
+while true
+do
+	sleep 1
+done
