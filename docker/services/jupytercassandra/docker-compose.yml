@@ -2,7 +2,7 @@ version: '3'
 
 services:
   cassandra-seed:
-    image: rmuresano/bdaascassandra:0_0_1
+    image: rmuresano/bdaascassandra:0_0_4
     environment:
       - CLUSTER_NAME=seminario
       - STORAGE_PORT=7000
@@ -16,7 +16,7 @@ services:
         ipv4_address: 172.28.1.2
 
   cassandra-node1:
-    image: rmuresano/bdaascassandra:0_0_1
+    image: rmuresano/bdaascassandra:0_0_4
     environment:
       - CASSANDRA_SEEDS=cassandra-seed
       - CLUSTER_NAME=seminario
@@ -33,7 +33,7 @@ services:
         ipv4_address: 172.28.1.3
 
   cassandra-node2:
-    image: rmuresano/bdaascassandra:0_0_1
+    image: rmuresano/bdaascassandra:0_0_4
     environment:
       - CASSANDRA_SEEDS=cassandra-seed
       - CLUSTER_NAME=seminario
@@ -49,7 +49,7 @@ services:
       cassandra:
         ipv4_address: 172.28.1.4
   jupyter:
-    image: rmuresano/bdaasjupyter:0_0_1
+    image: rmuresano/bdaasjupyter:0_0_4
     container_name: jupytercassandra
     environment:
       - STANDALONE=YES
