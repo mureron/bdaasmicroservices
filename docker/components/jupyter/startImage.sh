@@ -2,6 +2,8 @@
 DOCKER_TAG="rmuresano/bdaasjupyter:0_0_4"
 PACKAGE_REPO="../../runtimes/packages"
 
+source $PACKAGE_REPO/FileVersions.sh
+
 if [ -d packages ]; then
     rm -rf packages
 fi

@@ -1,8 +1,8 @@
 #!/bin/bash
 DOCKER_TAG="rmuresano/bdaassparkworker:0_0_4"
-PACKAGE_REPO="../runtimes/packages"
+PACKAGE_REPO="../../runtimes/packages"
 
-
+source $PACKAGE_REPO/FileVersions.sh
 if [ -d packages ]; then
     rm -rf packages
 fi
