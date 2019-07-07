@@ -34,9 +34,9 @@ dbms.jvm.additional=-Dunsupported.dbms.udc.source=tarball" > $NEO4J_HOME/conf/ne
 #mv $INSTALL_DIR/*.csv $NEO4J_HOME/import
 
 # Start Neo4j
-#$NEO4J_HOME/bin/neo4j start
+$NEO4J_HOME/bin/neo4j start
 
-#echo -e "\n\e[32m\nNeo4j instance $HOSTNAME deployment finished\n\e[39m" 
+echo -e "\n\e[32m\nNeo4j instance $HOSTNAME deployment finished\n\e[39m" 
 
 while true
 do

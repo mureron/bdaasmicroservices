@@ -2,7 +2,7 @@ version: '3'
 
 services:
   neo4j:
-    image: rmuresano/bdaasneo4j:0_0_4"
+    image: rmuresano/bdaasneo4j:0_0_4
     container_name: neo4j
     environment:
       - NEO4J_BOLT_PORT=7687
