@@ -10,7 +10,7 @@ The runtime has been created in order to optimize the size of the components in 
 
 The figure shows an overview of the bdaas runtime creation. 
 
-v
+![Runtime](images/Runtimes.png)
 
 
 For more information enter in the [Runtime Readme](runtimes/Readme.md) 
@@ -53,5 +53,5 @@ http://localshost:<portDefined>
 ```
 Below you can see the service working. 
 
-![Jupyter](images/Jupyter.png)
-![SparkMaster](images/Sparkmaster.png)
+![Jupyter](images/jupyter.png)
+![SparkMaster](images/sparkmaster.png)
