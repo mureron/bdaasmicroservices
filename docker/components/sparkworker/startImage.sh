@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_TAG="rmuresano/bdaassparkworker:0_0_1"
+DOCKER_TAG="rmuresano/bdaassparkworker:0_0_4"
 PACKAGE_REPO="../runtimes/packages"
 
 

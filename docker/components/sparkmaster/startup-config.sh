@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 echo -e "\e[31mSPARK MASTER\e[32m => IP:$IP, MASTER_PORT:$SPARK_MASTER_PORT, MASTER_WEBUI_PORT:$SPARK_MASTER_WEBUI_PORT\e[39m"
 
 export RUNTIME_DIR=/home/legacy

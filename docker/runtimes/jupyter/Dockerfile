@@ -1,4 +1,4 @@
-FROM rmuresano/bdaasspark:0_0_1
+FROM rmuresano/bdaasspark:0_0_4
 WORKDIR /home/legacy
 COPY packages/ ./
 

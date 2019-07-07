@@ -7,9 +7,9 @@ source FileVersions.sh
 
 # Verify the JAVA Installer
 if [  ! -f "$JAVA_PACKAGE" ]; then
-    echo "[INFO] $JAVA_PACKAGE] does not exist"
-    echo "[INFO] Prepare to download it"
-    echo "[INFO] You have to download from Oracle JRE "
+    echo "[WARNING] $JAVA_PACKAGE] does not exist"
+    echo "[WARNING] Prepare to download it"
+    echo "[WARNING] You have to download from Oracle JRE "
 else
     echo "[INFO] JAVA OK"
 fi

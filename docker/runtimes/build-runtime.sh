@@ -3,7 +3,7 @@
 echo $PWD
 $PWD/packages/./DownloadFiles.sh
 
-runtimes=(java python spark jupyter)
+runtimes=(java  java-optimization-1 java-optimization-2 python spark jupyter)
 for directory in "${runtimes[@]}"; do
     (
         cd $directory

@@ -1,5 +1,5 @@
-FROM  rmuresano/bdaasjava:0_0_1
-LABEL maintainer="Radiatus team"
+FROM  rmuresano/bdaasjava:0_0_4
+LABEL maintainer="Ronal Muresano"
 
 WORKDIR /home/legacy
 
