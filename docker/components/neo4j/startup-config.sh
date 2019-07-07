@@ -1,63 +1,44 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-export RUNTIME_DIR=/home/legacy
-export JAVA_HOME=$RUNTIME_DIR/jre
-export JUPYTERPATH=$RUNTIME_DIR/miniconda/bin
-export SPARK_HOME="$RUNTIME_DIR/spark"
-export HADOOP_HOME="$RUNTIME_DIR/hadoop"
-export CASSANDRA_HOME="$RUNTIME_DIR/Cassandra"
-export CASSANDRA_DRIVER_HOME="$RUNTIME_DIR/CassandraDriver"
-export PATH="$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$CASSANDRA_HOME/bin:$CASSANDRA_DRIVER_HOME/bin:$SPARK_HOME/bin:$PATH"
-export SPARK_DIST_CLASSPATH=$(hadoop classpath)
+echo -e "\e[32mNEO4J => IP=$HOSTNAME, NEO4J_BOLT_PORT:$NEO4J_BOLT_PORT, NEO4J_WEBUI_PORT:$NEO4J_WEBUI_PORT, PERSISTENT_VOLUME:$PERSISTENT_VOLUME\e[39m"
 
-cp -r $RUNTIME_DIR/examples/ /data/jupyter/
+export INSTALL_DIR="/home/legacy"
+export JAVA_HOME="/home/legacy/jre"
+export NEO4J_HOME="$INSTALL_DIR/neo4j"
+export PATH="$PATH:$JAVA_HOME/bin:$NEO4J_HOME/bin"
 
-echo "c = get_config()
-c.NotebookApp.notebook_dir = '/data/jupyter/'
-c.NotebookApp.password_required = False
-c.NotebookApp.token = ''
-c.NotebookApp.allow_origin = '*'
-c.NotebookApp.tornado_settings = {'headers': { 'Content-Security-Policy': \"frame-ancestors  'self' *\" }}" > $JUPYTERPATH/jupyter_notebook_config.py
+echo "Setting configurations for Neo4j..."
 
-echo "Jupyter Mode $STANDALONE & HDFS $HDFS & CASSANDRA $CASSANDRA"
+echo "
+dbms.directories.data=$PERSISTENT_VOLUME
+dbms.connectors.default_listen_address=$HOSTNAME
+dbms.directories.import=import
+dbms.connector.bolt.enabled=true
+dbms.connector.bolt.listen_address=$HOSTNAME:$NEO4J_BOLT_PORT
+dbms.connector.http.enabled=true
+dbms.connector.http.listen_address=$HOSTNAME:$NEO4J_WEBUI_PORT
+dbms.connector.https.enabled=false
+dbms.tx_log.rotation.retention_policy=1 days
+dbms.jvm.additional=-XX:+UseG1GC
+dbms.jvm.additional=-XX:-OmitStackTraceInFastThrow
+dbms.jvm.additional=-XX:+AlwaysPreTouch
+dbms.jvm.additional=-XX:+UnlockExperimentalVMOptions
+dbms.jvm.additional=-XX:+TrustFinalNonStaticFields
+dbms.jvm.additional=-XX:+DisableExplicitGC
+dbms.jvm.additional=-Djdk.tls.ephemeralDHKeySize=2048
+dbms.jvm.additional=-Djdk.tls.rejectClientInitiatedRenegotiation=true
+dbms.windows_service_name=neo4j
+dbms.security.allow_csv_import_from_file_urls=true
+dbms.jvm.additional=-Dunsupported.dbms.udc.source=tarball" > $NEO4J_HOME/conf/neo4j.conf
 
-if  [[ $HDFS == "YES" ]];
-then
-       # Set up the core-site Xml
-    echo "Set Up HDFS"
-    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-    <?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>
-    <configuration>
-        <property><name>fs.defaultFS</name><value>hdfs://$HDFS_NAMENODE_HOSTNAME:$HDFS_NAMENODE_METADATA_PORT</value></property>
-        <property><name>hadoop.http.staticuser.user</name><value>root</value></property>
-    </configuration>" > $HADOOP_HOME/etc/hadoop/core-site.xml
+#mv $INSTALL_DIR/*.csv $NEO4J_HOME/import
 
-fi
+# Start Neo4j
+#$NEO4J_HOME/bin/neo4j start
 
-if [[ $CASSANDRA == "YES" ]];
-then
-    # Including Cassandra Seeds
-    echo "$CASSANDRA_SEEDS" > /data/jupyter/cassandraseeds
-fi
+#echo -e "\n\e[32m\nNeo4j instance $HOSTNAME deployment finished\n\e[39m" 
 
-if [[ $STANDALONE == "YES" ]];
-then
-    echo "Jupyter Mode STANDALONE"
-    echo "Running Jupyter in StandAlone mode"
-    echo "Jupyter Port  = $JUPYTERPORT"
-    echo "Jupyter Path  = $JUPYTERPATH"
-    echo "$JUPYTERPATH/jupyter-lab --allow-root --ip $(hostname) --port $JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py"
-    jupyter-lab --allow-root --ip=0.0.0.0 --port=$JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py
-else
-    echo "Jupyter SPARK Mode DISTRIBUTED"
-    #Adding the information for the Spark Application WebUI
-
-    export PYSPARK_DRIVER_PYTHON=$JUPYTERPATH/jupyter
-	export PYSPARK_DRIVER_PYTHON_OPTS="lab --allow-root --ip 0.0.0.0 --port $JUPYTERPORT --no-browser --config=$JUPYTERPATH/jupyter_notebook_config.py"
-
-    echo "Launching jupyter"
-	echo " spark --master spark://$SPARK_MASTER_HOSTNAME:$SPARK_MASTER_PORT >> /tmp/jupyter.log 2>&1 "
-    pyspark --master spark://$SPARK_MASTER_HOSTNAME:$SPARK_MASTER_PORT
-fi
-
-echo "Jupyter Lab Ready To use"
+while true
+do
+	sleep 1
+done

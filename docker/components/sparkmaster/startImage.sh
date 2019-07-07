@@ -1,6 +1,6 @@
 #!/bin/bash
 DOCKER_TAG="rmuresano/bdaassparkmaster:0_0_4"
-PACKAGE_REPO="../runtimes/packages"
+PACKAGE_REPO="../../runtimes/packages"
 
 if [ -d packages ]; then
     rm -rf packages

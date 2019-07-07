@@ -1,5 +1,5 @@
 # Parto de la imagen principal
-FROM  rmuresano/bdaasjupyter:0_0_4
+FROM  rmuresano/bdaasjava:0_0_4
 LABEL maintainer="Ronal Muresano"
 
 WORKDIR /home/legacy
