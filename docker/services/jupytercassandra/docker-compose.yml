@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  cassandra-seed:
+    image: rmuresano/bdaascassandra:0_0_4
+    environment:
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+      - CASSANDRA_SEEDS=172.28.1.2,172.28.1.3,172.28.1.4
+    volumes:
+      - cassandra-volume-seed:/data/cassandra
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.2
+
+  cassandra-node1:
+    image: rmuresano/bdaascassandra:0_0_4
+    environment:
+      - CASSANDRA_SEEDS=172.28.1.2,172.28.1.3,172.28.1.4
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+    depends_on:
+      - cassandra-seed
+    volumes:
+      - cassandra-volume-node1:/data/cassandra
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.3
+
+  cassandra-node2:
+    image: rmuresano/bdaascassandra:0_0_4
+    environment:
+      - CASSANDRA_SEEDS=172.28.1.2,172.28.1.3,172.28.1.4
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+    depends_on:
+      - cassandra-seed
+    volumes:
+      - cassandra-volume-node2:/data/cassandra
+
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.4
+  jupyter:
+    image: rmuresano/bdaasjupyter:0_0_4
+    environment:
+      - STANDALONE=YES
+      - HDFS=NO
+      - CASSANDRA=YES
+      - JUPYTERPORT=8900
+      - CASSANDRA_SEEDS=172.28.1.2,172.28.1.3,172.28.1.4
+    networks:
+      cassandra:
+        ipv4_address: 172.28.1.1
+    ports:
+      - "8900:8900"
+    depends_on:
+      - cassandra-seed
+    volumes:
+      - jupyter-vol:/data/jupyter/
+
+volumes:
+  jupyter-vol:
+  cassandra-volume-seed:
+  cassandra-volume-node1:
+  cassandra-volume-node2:
+
+networks:
+  cassandra:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.1.0/24
