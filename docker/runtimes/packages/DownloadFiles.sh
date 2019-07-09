@@ -10,7 +10,9 @@ if [  ! -f "$JAVA_PACKAGE" ]; then
     echo "[WARNING] $JAVA_PACKAGE] does not exist"
     echo "[WARNING] Prepare to download it"
     echo "[WARNING] You have to download from Oracle JRE "
+    wget -O $JAVA_PACKAGE $JAVA_URL_DOWNLOAD
 else
+
     echo "[INFO] JAVA OK"
 fi
 

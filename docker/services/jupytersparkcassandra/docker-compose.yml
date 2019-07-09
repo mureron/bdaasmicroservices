@@ -5,26 +5,33 @@ services:
     environment:
       - CLUSTER_NAME=seminario
       - STORAGE_PORT=7000
-      - START_NATIVE_TRANSPORT=TRUE
       - NATIVE_TRANSPORT_PORT=9042
       - RPC_PORT=9160
     volumes:
       - cassandra-volume-seed:/data/cassandra
-
   cassandra-node1:
     image: rmuresano/bdaascassandra:0_0_4
     environment:
-      - CASSANDRA_SEEDS=cassandra-seed
+      - CASSANDRA_SEEDS=cassandra-seed, cassandra-node1, cassandra-node2
       - CLUSTER_NAME=seminario
       - STORAGE_PORT=7000
-      - START_NATIVE_TRANSPORT=TRUE
       - NATIVE_TRANSPORT_PORT=9042
       - RPC_PORT=9160
-    depends_on:
-      - cassandra-seed
     volumes:
       - cassandra-volume-node1:/data/cassandranode1
 
+  cassandra-node2:
+    image: rmuresano/bdaascassandra:0_0_4
+    environment:
+      - CASSANDRA_SEEDS=cassandra-seed, cassandra-node1, cassandra-node2
+      - CLUSTER_NAME=seminario
+      - STORAGE_PORT=7000
+      - NATIVE_TRANSPORT_PORT=9042
+      - RPC_PORT=9160
+    volumes:
+      - cassandra-volume-node2:/data/cassandranode2
+
+# Set 
 # Set up NameNode and Spark Master
   sparkmaster:
     image: rmuresano/bdaassparkmaster:0_0_4
@@ -78,12 +85,15 @@ services:
       - STANDALONE=NO
       - JUPYTERPORT=8900
       - HDFS=YES
+      - CASSANDRA=YES
       - HDFS_NAMENODE_HOSTNAME=sparkmaster
       - HDFS_DATANODE_WEBUI_PORT=50075
       - HDFS_NAMENODE_METADATA_PORT=9000
       - HDFS_REPLICATION_FACTOR=1
       - SPARK_MASTER_HOSTNAME=sparkmaster
       - SPARK_MASTER_PORT=7077
+      - CASSANDRA_SEEDS=cassandra-seed, cassandra-node1, cassandra-node2
+
     ports:
       - "8900:8900" # WEB interface JupyterLab
     volumes:
@@ -94,3 +104,4 @@ volumes:
   hdfs-name-node:
   cassandra-volume-seed:
   cassandra-volume-node1:
+  cassandra-volume-node2:
