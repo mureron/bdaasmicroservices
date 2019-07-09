@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  cassandra-1:
+    image: cassandra:3
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=Cassandra_cluster
+      - CASSANDRA_SEEDS=cassandra-1,cassandra-2
+      - CASSANDRA_BROADCAST_ADDRESS=cassandra-1
+    volumes:
+      - cassandra-volume-1:/var/lib/cassandra
+    deploy:
+      placement:
+        constraints: [node.hostname == worker-bdaas-1]
+
+  cassandra-2:
+    image: cassandra:3
+    environment:
+      - CASSANDRA_CLUSTER_NAME=Cassandra_cluster
+      - CASSANDRA_SEEDS=cassandra-1,cassandra-2
+      - CASSANDRA_BROADCAST_ADDRESS=cassandra-2
+    volumes:
+      - cassandra-volume-2:/var/lib/cassandra
+    deploy:
+      placement:
+        constraints: [node.hostname==worker-bdaas-2]
+
+  cassandra-3:
+    image: cassandra:3
+    depends_on:
+      - cassandra-1
+      - cassandra-2
+    environment:
+      - CASSANDRA_CLUSTER_NAME=Cassandra_cluster
+      - CASSANDRA_SEEDS=cassandra-1,cassandra-2
+      - CASSANDRA_BROADCAST_ADDRESS=cassandra-3
+    volumes:
+      - cassandra-volume-3:/var/lib/cassandra
+    deploy:
+      placement:
+        constraints: [node.hostname==worker-bdaas-1]
+
+volumes:
+  cassandra-volume-1:
+  cassandra-volume-2:
+  cassandra-volume-3:

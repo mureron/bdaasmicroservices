@@ -2,7 +2,7 @@ version: '3.5'
 services:
 # Set up NameNode and Spark Master
   sparkmaster:
-    image: rmuresano/bdaassparkmaster:0_0_1
+    image: rmuresano/bdaassparkmaster:0_0_4
     hostname: sparkmaster
     environment:
       - SPARK_MASTER_PORT=7077
@@ -22,7 +22,7 @@ services:
 
 # Setup the Worker Node 1.
   sparkworker:
-    image: rmuresano/bdaassparkworker:0_0_1
+    image: rmuresano/bdaassparkworker:0_0_4
     hostname: sparkworker
     depends_on:
       - sparkmaster

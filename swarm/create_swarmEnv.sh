@@ -16,4 +16,6 @@ SWARM_TOKEN=$(docker-machine ssh manager-bdaas "docker swarm join-token worker -
 for WORKER in  $(seq 1 $NUM_WORKERS) 
 do
     docker-machine ssh $WORKER_NAME-$WORKER "docker swarm join --token $SWARM_TOKEN $MANAGER_IP:2377"
+    docker-machine ssh $WORKER_NAME-$WORKER "sudo sysctl -w vm.max_map_count=262144"
+    docker-machine ssh $WORKER_NAME-$WORKER "sudo echo 'vm.max_map_count=262144' >> /etc/sysctl.conf"
 done
