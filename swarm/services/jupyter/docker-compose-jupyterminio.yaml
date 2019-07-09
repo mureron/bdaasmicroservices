@@ -8,6 +8,8 @@ services:
       - HDFS=NO
       - JUPYTERPORT=8900
       - JUPYTER_NOTEBOOKS_DIR=/data/juptyer
+    networks:
+      - minio_distributed
     ports:
       - "8900:8900"
     volumes:
@@ -15,3 +17,6 @@ services:
 volumes:
   jupyter-vol:
 
+networks:
+  minio_distributed:
+    driver: overlay

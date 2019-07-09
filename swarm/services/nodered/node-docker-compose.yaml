@@ -1,0 +1,27 @@
+version: "3"
+services:
+  homeassistant:
+    image: homeassistant/home-assistant
+    ports:
+      - "8123:8123"
+      - "3218:3218"
+    volumes:
+      - /home/docker/home-assistant:/config
+      - /etc/localtime:/etc/localtime:ro
+
+  nodered:
+    image: nodered/node-red-docker:slim
+    ports:
+      - "1880:1880"
+    volumes:
+      - /opt/docker/nodered:/data
+
+  mqtt:
+    image: toke/mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - /homedocker/mqtt/config:/mqtt/config:ro
+      - /home/docker/mqtt/log:/mqtt/log
+      - /home/docker/mqtt/data:/mqtt/data

@@ -12,6 +12,8 @@ services:
       - HDFS_NAMENODE_WEBUI_PORT=50070
       - HDFS_REPLICATION_FACTOR=1
       - HDFS=YES
+    networks:
+      - spark_distributed
     ports:
       - "8080:8080" #Web Interface Master
       - "7077:7077" #Master Port
@@ -36,6 +38,8 @@ services:
       - SPARK_WORKER_WEBUI_PORT=8081
       - HDFS_NAMENODE_WEBUI_PORT=50070
       - HDFS=YES
+    networks:
+      - spark_distributed
     ports:
       - "8081-8090:8081"
     deploy:
@@ -49,7 +53,7 @@ services:
         condition: on-failure
     
   jupyter:
-    image: rmuresano/bdaasjupyter:0_0_2
+    image: rmuresano/bdaasjupyter:0_0_4
     hostname: jupyter
     depends_on:
       - sparkmaster
@@ -63,6 +67,8 @@ services:
       - HDFS_REPLICATION_FACTOR=1
       - SPARK_MASTER_HOSTNAME=sparkmaster
       - SPARK_MASTER_PORT=7077
+    networks:
+      - spark_distributed
     ports:
       - "8901:8901" # WEB interface JupyterLab
     volumes:
@@ -72,3 +78,7 @@ volumes:
   jupyter-vol:
   hdfs-name-node:
   hdfs-data-node:
+
+networks:
+  spark_distributed:
+    driver: overlay

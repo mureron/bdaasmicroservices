@@ -11,7 +11,7 @@ services:
       - zookeeper-volume:/data
     deploy:
       placement:
-        constraints: [node.hostname==swarm-manager]
+        constraints: [node.hostname==manager-bdaas]
 
   kafka-schema-registry:
     image: confluentinc/cp-schema-registry:5.1.2
@@ -25,7 +25,7 @@ services:
       - kafka-1
     deploy:
       placement:
-        constraints: [node.hostname==swarm-manager]
+        constraints: [node.hostname==manager-bdaas]
 
   kafka-rest-proxy:
     image: confluentinc/cp-kafka-rest:5.1.2
@@ -43,7 +43,7 @@ services:
       - kafka-1
     deploy:
       placement:
-        constraints: [node.hostname==swarm-manager]
+        constraints: [node.hostname==manager-bdaas]
 
   kafka-1:
     image: confluentinc/cp-kafka:5.1.2
@@ -63,7 +63,7 @@ services:
       - zookeeper
     deploy:
       placement:
-        constraints: [node.hostname==swarm-worker1]
+        constraints: [node.hostname==worker-bdaas-1]
 
   kafka-2:
     image: confluentinc/cp-kafka:5.1.2
@@ -81,7 +81,7 @@ services:
       - zookeeper
     deploy:
       placement:
-        constraints: [node.hostname==swarm-worker2]
+        constraints: [node.hostname==worker-bdaas-2]
 
   kafka-3:
     image: confluentinc/cp-kafka:5.1.2
@@ -99,7 +99,7 @@ services:
       - zookeeper
     deploy:
       placement:
-        constraints: [node.hostname==swarm-worker3]
+        constraints: [node.hostname==worker-bdaas-3]
 
 volumes:
   zookeeper-volume:
