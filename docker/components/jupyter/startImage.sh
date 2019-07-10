@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_TAG="rmuresano/bdaasjupyter:0_0_4"
+DOCKER_TAG="rmuresano/bdaasjupyter:0_0_5"
 PACKAGE_REPO="../../runtimes/packages"
 
 source $PACKAGE_REPO/FileVersions.sh

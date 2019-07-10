@@ -13,7 +13,6 @@ export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 cp -r $RUNTIME_DIR/examples/ /data/jupyter/
 
 echo "c = get_config()
-c.NotebookApp.notebook_dir = '/data/jupyter/'
 c.NotebookApp.password_required = False
 c.NotebookApp.token = ''
 c.NotebookApp.allow_origin = '*'
