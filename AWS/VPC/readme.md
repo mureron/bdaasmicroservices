@@ -75,10 +75,35 @@ Then, the public subnet has to be asssociated with the IGW in order to have inte
 
 ### NAT Gateway
 
-To set up the Nat Ga
+It allows to access the private subnet to have access to Internet. This must be configurated in the Public Subnet and this is encharge to give access. It translates the IP address to the private instance.
+
+There are two kinds of Nat Devices:
 
 
 
+To set up the Nat Gateway
+
+We have to search the id of the public subnet and create a new nat gateway. In this point we have to include
+
+```
+Subnet: ID to the public 
+Elastic IP: X.X.X.X IP associated 
+```
+
+To use it, we have to associate in the route table in order to target in on a that gateway. 
+
+Note: The RonalTesting_RT_Main was created automatycally using the default configuration. 
+
+In this point we have to search it and not to confuse with the RonalTesting_RT that point out to the public subnet. 
+
+In this case, we have to route to the RonalTesting_RT_Main and  the private is associated by default. For this reason, we have to route using the edit botton and add the following:
+
+```
+Destination      Target
+0.0.0.0/0      RonalTestinNat
+````
+
+Note: Se tiene que asociar al nat que se ha configurado previamente.
 
 ![NatDevice](images/natdevice.png)
 
