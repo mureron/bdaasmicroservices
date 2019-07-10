@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-service-deployment
+spec:
+  selector:
+    app: jupyter-notebook
+  ports:
+  - protocol: TCP
+    port: 8888 #
+    targetPort: 8888
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyter-notebook
+  labels:
+    app: jupyter-notebook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyter-notebook
+  template:
+    metadata:
+      labels:
+        app: jupyter-notebook
+    spec:
+      containers:
+      - name: rmuresano-jupyter
+        image: rmuresano/bdaasjupyter:0_0_5
+        env:
+        - name: STANDALONE
+          value: "YES"
+        - name: CASSANDRA
+          value: "NO"
+        - name: HDFS
+          value: "NO"
+        - name: JUPYTERPORT
+          value: "8888"
+        ports:
+        - containerPort: 8888
