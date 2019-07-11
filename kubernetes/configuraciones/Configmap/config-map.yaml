@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata:
+  name: example-configmap 
+data:
+  # Configuration values can be set as key-value properties
+  database: mongodb
+  database_uri: mongodb://localhost:27017
+  TEST_VARIABLE: HOLA
+  # Or set as complete file contents (even JSON!)
+  keys: | 
+    image.public.key=771 
+    rsa.public.key=42
+    

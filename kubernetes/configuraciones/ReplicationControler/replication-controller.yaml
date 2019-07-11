@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: jupyter-notebook
+  labels: 
+    name: jupyter-notebook
+spec:
+  replicas: 1
+  selector:
+    name: jupyter-notebook
+  template:
+    metadata:
+      labels:
+        name: jupyter-notebook
+    spec:
+      containers:
+      - name: rmuresano-jupyter
+        image: rmuresano/bdaasjupyter:0_0_5
+        env: 
+        - name: STANDALONE
+          value: "YES"
+        - name: CASSANDRA
+          value: "NO"
+        - name: HDFS
+          value: "NO"
+        - name: JUPYTERPORT
+          value: "8888"  
+        ports:
+        - containerPort: 8888
