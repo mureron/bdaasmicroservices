@@ -6,11 +6,21 @@ JAVA_PACKAGE="jre-8u211-linux-x64.tar.gz"
 JAVA_URL_DOWNLOAD="https://javadl.oracle.com/webapps/download/AutoDL?BundleId=238719_478a62b7d4e34b78b671c754eaaf38ab"
 
 # PYTHON PACKAGE
-MINICONDA_PACKAGE="Miniconda3-latest-Linux-x86_64.sh"
-MINICONDA_URL_DOWNLOAD="https://repo.continuum.io/miniconda/$MINICONDA_PACKAGE"
+MINICONDA_PACKAGE="Anaconda3-2020.02-Linux-x86_64.sh"
+MINICONDA_URL_DOWNLOAD="https://repo.anaconda.com/archive/$MINICONDA_PACKAGE"
+
+ANACONDA_PACKAGE="Anaconda3-2020.02-Linux-x86_64.sh"
+# MINICONDA_URL_DOWNLOAD="https://repo.continuum.io/miniconda/$MINICONDA_PACKAGE"
+ANACONDA_URL_DOWNLOAD="https://repo.anaconda.com/archive/$ANACONDA_PACKAGE"
 
 # SPARK PACKAGE
-SPARK_VERSION="2.3.3"
+#SPARK_VERSION="2.3.3"
+#SPARK_PACKAGE="spark-$SPARK_VERSION-bin-without-hadoop.tgz"
+#SPARK_URL_DOWNLOAD="https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-without-hadoop.tgz"
+
+
+# SPARK PACKAGE
+SPARK_VERSION="3.1.1"
 SPARK_PACKAGE="spark-$SPARK_VERSION-bin-without-hadoop.tgz"
 SPARK_URL_DOWNLOAD="https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-without-hadoop.tgz"
 

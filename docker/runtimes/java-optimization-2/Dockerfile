@@ -8,7 +8,7 @@ RUN apt-get -y update && apt-get install -y bzip2 build-essential libssl1.0.0 li
 WORKDIR /home/legacy/shellinabox
 RUN mkdir -p shellinaboxBin && autoreconf -i && ./configure --prefix=/home/legacy/shellinabox/shellinaboxBin/ && make && make install
 
-FROM ubuntu:16.04 
+FROM ubuntu:16.04
 WORKDIR /home/legacy
 COPY --from=builder /home/legacy/jre /home/legacy/jre
 COPY --from=builder /home/legacy/shellinabox/ /home/legacy/shellinabox/

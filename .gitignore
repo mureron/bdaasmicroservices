@@ -1,10 +1,11 @@
 docker/runtimes/packages/Miniconda3-latest-Linux-x86_64.sh
 docker/runtimes/packages/hadoop-2.7.7.tar.gz
 docker/runtimes/packages/shellinabox-2.20.zip
-docker/runtimes/packages/spark-2.3.3-bin-without-hadoop.tgz
+docker/runtimes/packages/spark-3.1.1-bin-without-hadoop.tgz
 docker/runtimes/packages/apache-cassandra-3.11.4-bin.tar.gz
 docker/runtimes/packages/spark-cassandra-connector_2.11-2.0.9.jar
 docker/runtimes/packages/neo4j-community-3.5.7-unix.tar.gz
 docker/runtimes/packages/jre-8u211-linux-x64.tar.gz
+docker/runtimes/packages/Anaconda3-2020.02-Linux-x86_64.sh
 kubernetes/cluster/.vagrant
 .*
