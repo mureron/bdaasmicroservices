@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_TAG="rmuresano/bdaaspythonmini:0_0_4"
+DOCKER_TAG="rmuresano/bdaaspython:0_0_4"
 PACKAGE_REPO="../packages"
 
 # In the version file are saved all the references to the

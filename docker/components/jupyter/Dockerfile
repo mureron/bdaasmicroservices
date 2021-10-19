@@ -18,4 +18,4 @@ RUN /home/legacy/miniconda/bin/pip3 install --user asyncio-contextmanager
 # Install Features (Variable Inspector)
 RUN /home/legacy/miniconda/bin/pip install lckr-jupyterlab-variableinspector
 
-ENTRYPOINT ./startup-config.s
+ENTRYPOINT ./startup-config.sh

@@ -9,7 +9,7 @@ services:
       - JUPYTERPORT=8900
       - HDFS=NO
     ports:
-      - "8900:8900" # WEB interface JupyterLab
+      - "10000:8900" # WEB interface JupyterLab
     volumes:
       - jupyter-vol:/data/jupyter/
 

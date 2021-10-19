@@ -13,6 +13,7 @@ mkdir -p packages
 
 # Copy file to be trasnferred to the Docker instance
 
+echo $PACKAGE_REPO/$HADOOP_PACKAGE
 #Installing Hadoop
 mkdir packages/hadoop && tar -xzvf $PACKAGE_REPO/$HADOOP_PACKAGE --strip-components 1 -C packages/hadoop
 
@@ -28,4 +29,4 @@ echo 'export SPARK_DIST_CLASSPATH=$(/home/legacy/hadoop/bin/hadoop classpath):/h
 cp $PACKAGE_REPO/$SPARK_CASSANDRA_CONNECTOR_PACKAGE packages/spark/jars
 
 docker build  -t $DOCKER_TAG .
-rm -rf packages
+#rm -rf packages

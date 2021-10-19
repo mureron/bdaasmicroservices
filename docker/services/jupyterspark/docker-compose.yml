@@ -17,7 +17,7 @@ services:
       - "8080:8080" #Web Interface Master
       - "7077:7077" #Master Port
       - "9000:9000" # HDFS PORT
-      - "50070:50070" # WEB NameNode Int
+      - "10000:50070" # WEB NameNode Int
     volumes:
       - hdfs-name-node:/hdfsdata/nameNode/
 # Setup the Worker Node 1.

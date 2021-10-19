@@ -14,12 +14,6 @@ ANACONDA_PACKAGE="Anaconda3-2020.02-Linux-x86_64.sh"
 ANACONDA_URL_DOWNLOAD="https://repo.anaconda.com/archive/$ANACONDA_PACKAGE"
 
 # SPARK PACKAGE
-#SPARK_VERSION="2.3.3"
-#SPARK_PACKAGE="spark-$SPARK_VERSION-bin-without-hadoop.tgz"
-#SPARK_URL_DOWNLOAD="https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-without-hadoop.tgz"
-
-
-# SPARK PACKAGE
 SPARK_VERSION="3.1.1"
 SPARK_PACKAGE="spark-$SPARK_VERSION-bin-without-hadoop.tgz"
 SPARK_URL_DOWNLOAD="https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-without-hadoop.tgz"
@@ -29,13 +23,11 @@ SHELLINABOX_VERSION="2.20"
 SHELLINABOX_PACKAGE="shellinabox-$SHELLINABOX_VERSION.zip"
 SHELLINABOX_URL_DOWNLOAD="https://github.com/shellinabox/shellinabox/archive/v$SHELLINABOX_VERSION.zip"
 
-
 HADOOP_VERSION="2.7.7"
 HADOOP_PACKAGE="hadoop-$HADOOP_VERSION.tar.gz"
-HADOOP_URL_DOWNLOAD="http://apache.rediris.es/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
+HADOOP_URL_DOWNLOAD="https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz"
 
 # CASSANDRA
-
 CASSANDRA_VERSION="3.11.4"
 CASSANDRA_PACKAGE="apache-cassandra-3.11.4-bin.tar.gz"
 CASSANDRA_URL_DOWNLOAD="http://apache.uvigo.es/cassandra/$CASSANDRA_VERSION/$CASSANDRA_PACKAGE"
